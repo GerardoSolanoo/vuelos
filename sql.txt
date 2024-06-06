@@ -1,0 +1,32 @@
+CREATE OR REPLACE FUNCTION evitar_eliminar_con_registros()
+RETURNS event_trigger AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM pg_catalog.pg_tables
+        WHERE schemaname = TG_TABLE_SCHEMA
+        AND tablename = TG_TABLE_NAME
+    ) THEN
+       ,, TG_TABLE_NAME;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE EVENT TRIGGER trig_detectar_alter_table
+ON ddl_command_end
+WHEN tag IN ('DROP TABLE', 'ALTER TABLE')
+EXECUTE FUNCTION evitar_eliminar_con_registros();
+
+
+
+DO $$
+DECLARE
+    tabla_record RECORD;
+    trigger_name VARCHAR;
+BEGIN
+    FOR tabla_record IN SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE' LOOP
+        trigger_name := 'trigger_evitar_eliminar_' || tabla_record.table_name;
+        EXECUTE 'CREATE TRIGGER ' || trigger_name || '
+        BEFORE DELETE OR UPDATE ON ' || tabla_record.table_name || '
+        FOR EACH ROW EXECUTE FUNCTION evitar_eliminar_con_registros()';
+    END LOOP;
+END $$;
