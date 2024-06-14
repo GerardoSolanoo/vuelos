@@ -1,20 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Estado_Viaje } from 'src/common/enums/estado-viaje.enum';
-import { Aeropuerto } from 'src/resource/aeropuertos/entities/aeropuerto.entity';
-import { Avion } from 'src/resource/aviones/entities/avion.entity';
-import { Vuelo } from 'src/resource/vuelos/entities/vuelo.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Estado_Viaje } from '../../../common/enums/estado-viaje.enum';
+import { Aeropuerto } from '../../../resource/aeropuertos/entities/aeropuerto.entity';
+import { Vuelo } from '../../../resource/vuelos/entities/vuelo.entity';
+import { TarifaClaseViajes } from './tarifasclase-viaje.entity';
+import { TarifaDistanciaViajes } from './tarifadistancia-viajes.entity';
 
 @Entity()
 export class Viaje {
   @PrimaryGeneratedColumn()
   Viaje_ID: number;
 
-  @Column({ nullable: false, type: 'date' })
-  fechaSalida: Date;
+  @Column({ nullable: true, type: 'timestamptz' })
+  fechaSalida: Date | string;
 
-  @Column({ nullable: false, type: 'date' })
-  fechaLlegada: Date;
+  @Column({ nullable: true, type: 'timestamptz' })
+  fechaLlegada: Date | string;
 
+  @Column({ nullable: true, type: 'integer' })
+  duracion_vuelo_ms: number;
   @Column({
     type: 'enum',
     enum: Estado_Viaje,
@@ -23,15 +32,25 @@ export class Viaje {
   })
   estadoViaje: Estado_Viaje;
 
-  @ManyToOne(() => Avion, { nullable: false })
-  numeroAvion: Avion;
-
-  @ManyToOne(() => Aeropuerto, { nullable: false })
+  @ManyToOne(() => Aeropuerto, { nullable: false, eager: true })
   aeropuertoDestino: Aeropuerto;
 
-  @ManyToOne(() => Aeropuerto, { nullable: false })
+  @ManyToOne(() => Aeropuerto, { nullable: false, eager: true })
   aeropuertoOrigen: Aeropuerto;
 
-  @ManyToOne(() => Vuelo, { nullable: false })
+  @ManyToOne(() => Vuelo, { nullable: false, eager: true })
   vueloId: Vuelo;
+
+  @OneToMany(() => TarifaClaseViajes, (m) => m.viaje, { eager: true })
+  tarifas_clase: TarifaClaseViajes[];
+  @OneToMany(() => TarifaDistanciaViajes, (m) => m.viaje, { eager: true })
+  tarifas_distancia: TarifaDistanciaViajes[];
+
+  calculLugaresDisponoibles() {
+    return (
+      this.vueloId.avion_Id.avion_Capacidad_Pasajeros -
+      this.vueloId.pasajerosApartados -
+      this.vueloId.pasajerosTotales
+    );
+  }
 }

@@ -5,15 +5,15 @@ import { CreateAvionDto } from '../../resource/aviones/dto/create-avion.dto';
 import { UpdateAvionDto } from '../../resource/aviones/dto/update-avion.dto';
 import { Avion } from '../../resource/aviones/entities/avion.entity';
 
-import { TransaccionService } from 'src/common/transaction/transaccion.service';
-import { Tipo_Transaccion } from 'src/common/enums/tipo_Transaccion.enum';
+import { TransaccionService } from '../../common/transaction/transaccion.service';
+import { Tipo_Transaccion } from '../../common/enums/tipo_Transaccion.enum';
 
 import { ModeloAvion } from '../../resource/modelos/entities/modelo-avion.entity';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
 import {
   Errores_Operaciones,
   Exito_Operaciones,
-} from 'src/common/helpers/operaciones.helpers';
+} from '../../common/helpers/operaciones.helpers';
 
 @Injectable()
 export class AvionesService {

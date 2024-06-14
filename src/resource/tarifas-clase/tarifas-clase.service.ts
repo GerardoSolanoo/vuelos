@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { TransaccionService } from 'src/common/transaction/transaccion.service';
-import { Tipo_Transaccion } from 'src/common/enums/tipo_Transaccion.enum';
+import { TransaccionService } from '../../common/transaction/transaccion.service';
+import { Tipo_Transaccion } from '../../common/enums/tipo_Transaccion.enum';
 import {
   Errores_Operaciones,
   Exito_Operaciones,
-} from 'src/common/helpers/operaciones.helpers';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
+} from '../../common/helpers/operaciones.helpers';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
 import { CreateTarifaClaseDto } from './dto/create-tarifa-clase.dto';
 import { TarifaClase } from './entities/tarifa-clase.entity';
 import { UpdateTarifaClaseDto } from './dto/update-tarifas-clase.dto';

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
-import { Tipo_Transaccion } from 'src/common/enums/tipo_Transaccion.enum';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
+import { Tipo_Transaccion } from '../../common/enums/tipo_Transaccion.enum';
 import {
   Errores_Operaciones,
   Exito_Operaciones,
-} from 'src/common/helpers/operaciones.helpers';
-import { TransaccionService } from 'src/common/transaction/transaccion.service';
+} from '../../common/helpers/operaciones.helpers';
+import { TransaccionService } from '../../common/transaction/transaccion.service';
 import { Repository } from 'typeorm';
 import { CreateTarifaDistanciaDto } from './dto/create-tarifa-distancia.dto';
 import { TarifaDistancia } from './entities/tarifa-distancia.entity';
@@ -20,14 +20,15 @@ export class TarifaDistanciaService {
     private readonly tarifaDistanciaRepository: Repository<TarifaDistancia>,
   ) {}
 
-  create(createTarifaDistanciaDto: CreateTarifaDistanciaDto) {
-    const tarifaDistancia_Creado: any = this.transaccionservice.transaction(
-      Tipo_Transaccion.Guardar,
-      TarifaDistancia,
-      createTarifaDistanciaDto,
-    );
+  async create(createTarifaDistanciaDto: CreateTarifaDistanciaDto) {
+    const tarifaDistancia_Creado: any =
+      await this.transaccionservice.transaction(
+        Tipo_Transaccion.Guardar,
+        TarifaDistancia,
+        createTarifaDistanciaDto,
+      );
 
-    if (tarifaDistancia_Creado == 'Error') {
+    if (tarifaDistancia_Creado === 'Error') {
       return {
         status: 400,
         message: Errores_Operaciones.EROR_CREAR,
@@ -53,7 +54,7 @@ export class TarifaDistanciaService {
       nombre,
     );
 
-    if (tarifaDistancia_Buscar == 'Error') {
+    if (tarifaDistancia_Buscar === 'Error') {
       return {
         status: 400,
         message: Errores_Operaciones.ERROR_CONSULTAR,
@@ -76,7 +77,7 @@ export class TarifaDistanciaService {
         id.toString(),
       );
 
-    if (tarifaDistancia_Actualzizar == 'Error') {
+    if (tarifaDistancia_Actualzizar === 'Error') {
       return {
         status: 400,
         message: Errores_Operaciones.ERROR_ACTUALIZAR,
@@ -99,7 +100,7 @@ export class TarifaDistanciaService {
         id.toString(),
       );
 
-    if (tarifaDistancia_Eliminar == 'Error') {
+    if (tarifaDistancia_Eliminar === 'Error') {
       return {
         status: 400,
         message: Errores_Operaciones.ERROR_ELIMINAR,

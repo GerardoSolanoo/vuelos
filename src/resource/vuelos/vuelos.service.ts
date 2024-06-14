@@ -5,13 +5,13 @@ import { CreateVueloDto } from '../../resource/vuelos/dto/create-vuelo.dto';
 import { UpdateVueloDto } from '../../resource/vuelos/dto/update-vuelo.dto';
 import { Vuelo } from '../../resource/vuelos/entities/vuelo.entity';
 
-import { TransaccionService } from 'src/common/transaction/transaccion.service';
-import { Tipo_Transaccion } from 'src/common/enums/tipo_Transaccion.enum';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
+import { TransaccionService } from '../../common/transaction/transaccion.service';
+import { Tipo_Transaccion } from '../../common/enums/tipo_Transaccion.enum';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
 import {
   Errores_Operaciones,
   Exito_Operaciones,
-} from 'src/common/helpers/operaciones.helpers';
+} from '../../common/helpers/operaciones.helpers';
 
 @Injectable()
 export class VuelosService {

@@ -79,10 +79,13 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
+    "collectCoverage": true,
     "coverageDirectory": "../coverage",
+    "coverageReporters": ["text", "lcov", "json", "html"],
+    "collectCoverageFrom": [
+      "**/*.service.(t|j)s",
+      "!**/node_modules/**"
+    ],
     "testEnvironment": "node"
   }
 }

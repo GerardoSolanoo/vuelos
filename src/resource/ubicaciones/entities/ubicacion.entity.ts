@@ -7,7 +7,7 @@ export class Ubicacion {
   @PrimaryGeneratedColumn()
   ubicacion_Id: number;
 
-  @Column({ nullable: false, length: 30 })
+  @Column({ nullable: false, length: 224 })
   ubicacion_Nombre: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 8, nullable: false })
@@ -15,6 +15,9 @@ export class Ubicacion {
 
   @Column({ type: 'decimal', precision: 11, scale: 8, nullable: false })
   longitud: number;
+
+  @Column({ type: 'varchar', nullable: false })
+  timezone: string;
 
   @OneToMany(() => Aeropuerto, (aeropuerto) => aeropuerto.aeropuerto_Ubicacion)
   aeropuertosId: Aeropuerto[];

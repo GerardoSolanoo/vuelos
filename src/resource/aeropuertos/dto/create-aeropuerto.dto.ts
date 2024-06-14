@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsEnum, IsInt } from 'class-validator';
-import { TipoAeropuerto } from 'src/common/enums/tipo_aeropuerto.enum';
+import { TipoAeropuerto } from '../../../common/enums/tipo_aeropuerto.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAeropuertoDto {

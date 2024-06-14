@@ -35,10 +35,9 @@ export class TrabajadoresService {
     const trabajador = await this.trabajadoresRepository.findOne(options);
     if (!trabajador) {
       if (typeof id === 'number') {
-        throw new NotFoundException(`Trabajador
-         with ID ${id} not found`);
+        throw new NotFoundException(`Trabajador with ID ${id} not found`);
       } else {
-        throw new NotFoundException(`Trabajador not found`);
+        throw new NotFoundException('Trabajador not found');
       }
     }
     return trabajador;

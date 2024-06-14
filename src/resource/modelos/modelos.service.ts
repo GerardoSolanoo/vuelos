@@ -7,7 +7,7 @@ import {
   Errores_Operaciones,
   Exito_Operaciones,
 } from '../../common/helpers/operaciones.helpers';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
 import { CreateModeloAvionDto } from './dto/create-modelo-avion.dto';
 import { UpdateModeloAvionDto } from './dto/update-modelo-avion.dto';
 import { ModeloAvion } from './entities/modelo-avion.entity';
@@ -42,7 +42,6 @@ export class ModelosService {
       };
     }
   }
-
   async findAll() {
     return await this.modelosRepository.find();
   }
@@ -59,7 +58,7 @@ export class ModelosService {
     if (modelo_Consultado == 'Error') {
       return {
         status: 400,
-        message: 'Error al consultar el modelo',
+        message: 'Error al consultar',
       };
     } else {
       return {
@@ -103,18 +102,13 @@ export class ModelosService {
     if (modelo_Eliminar == 'Error') {
       return {
         status: 400,
-        message: Errores_Operaciones.ERROR_ELIMINAR,
+        message: 'Error al eliminar el modelo',
       };
     } else {
       return {
         status: 200,
-        message: Exito_Operaciones.Eliminar,
+        message: 'Modelo eliminado con éxito',
       };
     }
-  }
-
-  private handleDBExceptions(error: any) {
-    this.logger.error(error);
-    throw new Error('Unexpected error occurred');
   }
 }

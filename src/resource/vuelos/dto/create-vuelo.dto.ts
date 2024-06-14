@@ -39,8 +39,8 @@ export class CreateVueloDto {
 
   @ApiProperty({ description: 'Hora de salida del vuelo', nullable: false })
   @IsNotEmpty()
-  @IsDateString()
-  horaSalida: Date;
+  @IsString()
+  horaSalida: string;
 
   @ApiProperty({ description: 'Cantidad total de pasajeros', nullable: false })
   @IsNotEmpty()

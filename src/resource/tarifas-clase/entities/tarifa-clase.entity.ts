@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Estado_Logico } from '../../../common/enums/estado_logico.enum';
-import { Vuelo } from '../../../resource/vuelos/entities/vuelo.entity';
 
 @Entity()
 export class TarifaClase {
@@ -20,7 +19,4 @@ export class TarifaClase {
 
   @Column({ nullable: false })
   precioTarifa: number;
-
-  @OneToMany(() => Vuelo, (vuelo) => vuelo.tarifa_Clase_Id)
-  vuelo_Id: Vuelo;
 }

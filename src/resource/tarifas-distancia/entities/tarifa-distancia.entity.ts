@@ -1,12 +1,10 @@
-import { Ubicacion } from '../../../resource/ubicaciones/entities/ubicacion.entity';
-import { Vuelo } from '../../../resource/vuelos/entities/vuelo.entity';
+import { Ubicacion } from '../../ubicaciones/entities/ubicacion.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
   JoinColumn,
-  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -34,6 +32,6 @@ export class TarifaDistancia {
   @Column()
   precioTarifa: number;
 
-  @OneToMany(() => Vuelo, (vuelo) => vuelo.tarifa_distancia_Id)
-  vuelo_Id: Vuelo;
+  // @OneToMany(() => Vuelo, (vuelo) => vuelo.tarifa_distancia_Id)
+  // vuelo_Id: Vuelo;
 }

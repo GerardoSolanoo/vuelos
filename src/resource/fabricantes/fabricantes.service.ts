@@ -9,8 +9,8 @@ import { Tipo_Transaccion } from '../../common/enums/tipo_Transaccion.enum';
 import {
   Errores_Operaciones,
   Exito_Operaciones,
-} from 'src/common/helpers/operaciones.helpers';
-import { Estado_Logico } from 'src/common/enums/estado_logico.enum';
+} from '../../common/helpers/operaciones.helpers';
+import { Estado_Logico } from '../../common/enums/estado_logico.enum';
 
 @Injectable()
 export class FabricantesService {
@@ -36,7 +36,7 @@ export class FabricantesService {
       };
     } else {
       return {
-        status: 201,
+        status: 200,
         message: Exito_Operaciones.Crear,
       };
     }
